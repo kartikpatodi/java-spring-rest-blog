@@ -18,11 +18,16 @@ public class Author {
     private Long id;
     private String firstname;
     private String lastname;
+    @JsonIgnore
     private String username;
+    @JsonIgnore
     private String password;
+    @OneToMany
+    private final List<Post> posts;
 
     public Author() {
         super();
+        posts = new ArrayList<>();
     }
 
     public Author(String username, String firstname, String lastname, String password) {
@@ -69,6 +74,14 @@ public class Author {
         return password;
     }
 
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void addPost(Post post) {
+        posts.add(post);
+    }
+
     @Override
     public boolean equals(Object obj) {
         Author inputAuthor = (Author)obj;
@@ -82,13 +95,5 @@ public class Author {
             System.out.println("username not equal");
             return false;}
         return true;
-    }
-
-    public List<Post> getPosts() {
-        return null;
-    }
-
-    public void addPost(Post post) {
-        return;
     }
 }
