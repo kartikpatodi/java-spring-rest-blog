@@ -1,14 +1,18 @@
 package com.pluralsight.blog.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.Hibernate;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Author {
@@ -16,6 +20,9 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Version
+    private Long version;
+
     private String firstname;
     private String lastname;
     @JsonIgnore
